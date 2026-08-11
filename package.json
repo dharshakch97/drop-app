@@ -41,10 +41,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "better-sqlite3": "^13.0.2",
-    "electron": "^43.2.0"
+    "better-sqlite3": "^13.0.2"
   },
   "devDependencies": {
+    "electron": "^43.2.0",
     "electron-builder": "^25.1.8"
   }
 }
