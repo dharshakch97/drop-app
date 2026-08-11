@@ -1,18 +1,50 @@
 {
   "name": "drop",
   "version": "1.0.0",
-  "description": "",
+  "description": "Quick snippet and notes drop box app",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.drop.app",
+    "productName": "Drop",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "db.js",
+      "renderer/**/*"
+    ]
   },
   "keywords": [],
-  "author": "",
+  "author": "Dharshak Chebrolu",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "better-sqlite3": "^13.0.2",
     "electron": "^43.2.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^25.1.8"
   }
 }
