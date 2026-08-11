@@ -11,6 +11,7 @@
   "build": {
     "appId": "com.drop.app",
     "productName": "Drop",
+    "icon": "renderer/icon-512.png",
     "mac": {
       "category": "public.app-category.utilities",
       "target": [
