@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Drop</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <h1>Drop</h1>
+            <input id="search" type="text" placeholder="Search..." />
+        </header>
+
+        <main id="feed"></main>
+
+        <form id="composer">
+            <input id="tags" type="text" placeholder="tags (comma separated)" />
+            <textarea id="content" placeholder="Paste a snippet, command, or note..." rows="3"></textarea>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
