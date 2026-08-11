@@ -6,12 +6,15 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder --publish always"
   },
   "build": {
     "appId": "com.drop.app",
     "productName": "Drop",
     "icon": "renderer/icon-512.png",
+    "publish": [
+      "github"
+    ],
     "mac": {
       "category": "public.app-category.utilities",
       "target": [
