@@ -49,6 +49,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
-          GYP_MSVS_VERSION: '2022'
-          npm_config_msvs_version: '2022'
         run: npm run dist
