@@ -4,30 +4,112 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#090d16" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Drop</title>
+    <title>Drop - Visual Canvas & Task Hub</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="icon" type="image/png" href="icon-192.png" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <div class="app">
-        <header>
-            <h1>Drop</h1>
-            <input id="search" type="text" placeholder="Search..." />
+        <!-- Main Top Bar -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo-icon">💧</div>
+                <h1 class="app-title">Drop</h1>
+            </div>
+
+            <!-- New Item Button -->
+            <button id="add-card-btn" class="add-card-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>New Item</span>
+            </button>
+
+            <!-- View Switcher Controls -->
+            <div class="view-switcher" id="view-switcher">
+                <button class="view-btn" data-view="canvas" title="Storyboard / Canvas View">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <span>Canvas</span>
+                </button>
+                <button class="view-btn" data-view="grid" title="Grid View">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Grid</span>
+                </button>
+                <button class="view-btn" data-view="list" title="List View">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                    <span>List</span>
+                </button>
+            </div>
+
+            <!-- Search input -->
+            <div class="search-box">
+                <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input id="search" type="text" placeholder="Search tasks..." />
+            </div>
         </header>
 
-        <main id="feed"></main>
+        <!-- Main Feed / Spatial Canvas Container -->
+        <div class="feed-wrapper" id="feed-wrapper">
+            <svg id="canvas-svg" class="canvas-connections-svg">
+                <defs>
+                    <marker id="arrow-default" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+                    </marker>
+                    <marker id="arrow-indigo" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8" />
+                    </marker>
+                    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#34d399" />
+                    </marker>
+                    <marker id="arrow-amber" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24" />
+                    </marker>
+                    <marker id="arrow-rose" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb7185" />
+                    </marker>
+                    <marker id="arrow-violet" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#c084fc" />
+                    </marker>
+                    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="18" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
+                    </marker>
+                </defs>
+            </svg>
+            <main id="feed" class="feed view-canvas"></main>
+        </div>
+    </div>
 
-        <form id="composer">
-            <input id="tags" type="text" placeholder="tags (comma separated)" />
-            <textarea id="content" placeholder="Paste a snippet, command, or note..." rows="3"></textarea>
-            <button type="submit">Save</button>
-        </form>
+    <!-- Hidden File Input for Card Attachments -->
+    <input type="file" id="card-file-input" multiple accept="image/*,.pdf,.doc,.docx,.txt,.json,.md,.zip,.csv" style="display:none;" />
+
+    <!-- Drag Overlay -->
+    <div id="drop-overlay" class="drop-overlay">
+        <div class="drop-modal-content">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            <p>Drop images or files here to create a new item on the canvas</p>
+        </div>
+    </div>
+
+    <!-- Directional Link / Unlink Selection Modal -->
+    <div id="link-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Directional Link / Connection</h3>
+                <button id="close-link-modal" class="close-btn">✕</button>
+            </div>
+            <p class="modal-desc">Connect this card to another item (directional flow: <strong>This Card → Target Card</strong>):</p>
+            <div id="link-candidates-list" class="link-candidates-list"></div>
+        </div>
     </div>
 
     <script src="web-adapter.js"></script>

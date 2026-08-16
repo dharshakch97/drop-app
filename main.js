@@ -5,8 +5,10 @@ let db;
 
 function createWindow() {
     const win = new BrowserWindow({
-        width: 480,
-        height: 700,
+        width: 960,
+        height: 720,
+        minWidth: 480,
+        minHeight: 600,
         title: 'Drop',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
@@ -23,6 +25,7 @@ app.whenReady().then(() => {
 
     ipcMain.handle('entries:list', (_event, opts) => db.listEntries(opts));
     ipcMain.handle('entries:create', (_event, entry) => db.createEntry(entry));
+    ipcMain.handle('entries:update', (_event, { id, fields }) => db.updateEntry(id, fields));
     ipcMain.handle('entries:togglePin', (_event, id) => db.togglePin(id));
     ipcMain.handle('entries:delete', (_event, id) => db.deleteEntry(id));
 
