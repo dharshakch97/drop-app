@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -18,9 +19,16 @@
     <div class="app">
         <header>
             <h1>Drop</h1>
-            <input id="search" type="text" placeholder="Search..." />
+            <div class="header-controls">
+                <label class="toggle">
+                    <input type="checkbox" id="clipboardToggle" />
+                    Auto-capture clipboard
+                </label>
+                <input id="search" type="text" placeholder="Search..." />
+            </div>
         </header>
 
+        <div id="dropzone">Drag files here to save them</div>
         <main id="feed"></main>
 
         <form id="composer">

@@ -138,3 +138,58 @@ main#feed {
 #composer button:hover {
     background: #4a7fe8;
 }
+
+#dropzone {
+    margin: 12px;
+    padding: 16px;
+    border: 2px dashed #3a3a3a;
+    border-radius: 8px;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+}
+
+#dropzone.dragover {
+    border-color: #3a6fd8;
+    color: #3a6fd8;
+    background: #1f2a3f;
+}
+
+.entry-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.entry-file .file-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.entry-file button {
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 4px;
+    color: #ccc;
+    font-size: 11px;
+    padding: 3px 8px;
+    cursor: pointer;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #999;
+    cursor: pointer;
+}
