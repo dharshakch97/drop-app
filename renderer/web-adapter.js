@@ -55,6 +55,14 @@
                             return c.includes(q) || t.includes(q) || title.includes(q);
                         });
                     }
+                    entries = entries.map((e) => ({
+                        color: 'default',
+                        font_style: 'sans',
+                        layout_pos: '{"x":0,"y":0}',
+                        links: '[]',
+                        attachments: '[]',
+                        ...e,
+                    }));
                     entries.sort((a, b) => {
                         if (b.pinned !== a.pinned) return b.pinned - a.pinned;
                         return b.created_at - a.created_at;
@@ -65,7 +73,7 @@
             });
         },
 
-        async create({ type = 'snippet', title = '', content, tags = '' }) {
+        async create({ type = 'snippet', title = '', content, tags = '', color = 'default', font_style = 'sans', layout_pos = '{"x":0,"y":0}', links = '[]', attachments = '[]' }) {
             const { store } = await getStore('readwrite');
             const now = Date.now();
             const entry = {
@@ -74,6 +82,11 @@
                 title,
                 content,
                 tags,
+                color,
+                font_style,
+                layout_pos: typeof layout_pos === 'string' ? layout_pos : JSON.stringify(layout_pos),
+                links: typeof links === 'string' ? links : JSON.stringify(links),
+                attachments: typeof attachments === 'string' ? attachments : JSON.stringify(attachments),
                 pinned: 0,
                 created_at: now,
                 updated_at: now,
@@ -82,6 +95,30 @@
                 const req = store.add(entry);
                 req.onsuccess = () => resolve(entry);
                 req.onerror = () => reject(req.error);
+            });
+        },
+
+        async update(id, fields = {}) {
+            const { store } = await getStore('readwrite');
+            return new Promise((resolve, reject) => {
+                const getReq = store.get(id);
+                getReq.onsuccess = () => {
+                    const entry = getReq.result;
+                    if (!entry) return resolve(null);
+
+                    for (const [key, val] of Object.entries(fields)) {
+                        if (typeof val === 'object' && val !== null) {
+                            entry[key] = JSON.stringify(val);
+                        } else {
+                            entry[key] = val;
+                        }
+                    }
+                    entry.updated_at = Date.now();
+                    const putReq = store.put(entry);
+                    putReq.onsuccess = () => resolve(entry);
+                    putReq.onerror = () => reject(putReq.error);
+                };
+                getReq.onerror = () => reject(getReq.error);
             });
         },
 
