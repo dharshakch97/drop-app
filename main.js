@@ -53,14 +53,14 @@ app.whenReady().then(() => {
     ipcMain.handle('entries:list', (_event, opts) => db.listEntries(opts));
     ipcMain.handle('entries:create', (_event, entry) => db.createEntry(entry));
     ipcMain.handle('entries:togglePin', (_event, id) => db.togglePin(id));
-    ipcMain.handle('entries:delete', (_event, id) => {
+    ipcMain.handle('entries:delete', async (_event, id) => {
         try {
-            const entry = db.getEntry(id);
+            const entry = await db.getEntry(id);
             if (entry && entry.type === 'file' && entry.content) {
                 const filePath = path.join(filesDir, entry.content);
                 fs.rm(filePath, { force: true }, () => { });
             }
-            return db.deleteEntry(id);
+            return await db.deleteEntry(id);
         } catch (err) {
             console.log(err)
         }
